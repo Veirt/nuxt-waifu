@@ -98,7 +98,7 @@ export default {
   },
   watch: {
     filtered() {
-      this.getPictures(this.filtered)
+      this.getImages(this.filtered)
     },
   },
 }
