@@ -16,16 +16,33 @@
 
     <v-row>
       <v-col v-for="image in images" :key="image" cols="4">
-        <v-img :src="image" aspect-ratio="1" class="grey" position="top">
-          <template v-slot:placeholder>
-            <v-row class="fill-height ma-0" align="center" justify="center">
-              <v-progress-circular
-                indeterminate
-                color="#000"
-              ></v-progress-circular>
-            </v-row>
+        <v-dialog scrollable>
+          <template v-slot:activator="{ on, attrs }">
+            <v-img
+              v-bind="attrs"
+              v-on="on"
+              :src="image"
+              aspect-ratio="1"
+              class="grey"
+              position="top"
+            >
+              <template v-slot:placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular
+                    indeterminate
+                    color="#000"
+                  ></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
           </template>
-        </v-img>
+
+          <v-card>
+            <v-card-text>
+              <v-img :src="image" alt="Waifu Image"></v-img>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
       </v-col>
     </v-row>
   </div>
