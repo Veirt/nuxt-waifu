@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - nuxt-anime-api',
-    title: 'nuxt-anime-api',
+    titleTemplate: '%s - Waifu Pics',
+    title: 'Waifu Pics',
     htmlAttrs: {
       lang: 'en',
     },
@@ -44,7 +44,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'https://api.waifu.pics',
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -67,4 +69,5 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  telemetry: false,
 }
