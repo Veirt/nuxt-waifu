@@ -1,127 +1,33 @@
 <template>
   <div>
-    <v-card flat class="py-12">
-      <v-card-text>
-        <v-row no-gutters>
-          <v-col v-for="filter in filters.sfw" :key="filter" cols="auto">
-            <v-btn-toggle v-model="filtered">
-              <v-btn :value="filter">
-                {{ filter }}
-              </v-btn>
-            </v-btn-toggle>
-          </v-col>
-        </v-row>
-      </v-card-text>
-    </v-card>
-
-    <v-row>
-      <v-col v-for="image in images" :key="image" cols="6" sm="6" md="4" lg="4">
-        <v-dialog scrollable>
-          <template #activator="{ on, attrs }">
-            <v-img
-              v-bind="attrs"
-              :src="image"
-              aspect-ratio="1"
-              class="grey"
-              position="top"
-              v-on="on"
-            >
-              <template #placeholder>
-                <v-row class="fill-height ma-0" align="center" justify="center">
-                  <v-progress-circular
-                    indeterminate
-                    color="#000"
-                  ></v-progress-circular>
-                </v-row>
-              </template>
-            </v-img>
-          </template>
-
-          <v-card>
-            <img class="image" :src="image" alt="Waifu Image" />
-          </v-card>
-        </v-dialog>
-      </v-col>
-    </v-row>
+    <FilterCard />
+    <ImagesDisplay />
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  data() {
+  head() {
     return {
-      images: [],
-      filters: [{ sfw: [] }],
-      filtered: 'waifu',
+      title: 'Index',
     }
   },
-  watch: {
-    filtered() {
-      this.getImages(this.filtered)
-    },
-  },
-  created() {
-    this.getImages()
-    this.getFilters()
-  },
+
   mounted() {
     this.getNextImages()
   },
 
   methods: {
-    filterImages(image) {
-      if (!this.images.includes(image)) this.images.push(image)
-    },
-
-    async getImages() {
-      const res = await this.$axios({
-        method: 'POST',
-        baseURL: 'https://api.waifu.pics',
-        url: `/many/sfw/${this.filtered}`,
-        data: {
-          exclude: [],
-        },
-      })
-      if (this.filtered) this.images = []
-      res.data.files.forEach((image) => this.filterImages(image))
-    },
-
     getNextImages() {
-      window.onscroll = async () => {
+      window.onscroll = () => {
         const bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight ===
           document.documentElement.offsetHeight
         if (bottomOfWindow) {
-          const res = await this.$axios({
-            method: 'POST',
-            baseURL: 'https://api.waifu.pics',
-            url: `/many/sfw/${this.filtered}`,
-            data: {
-              exclude: [],
-            },
-          })
-          res.data.files.forEach((image) => this.filterImages(image))
+          this.$store.dispatch('fetchImages', { $axios: this.$axios })
         }
       }
-    },
-
-    async getFilters() {
-      const res = await this.$axios({
-        method: 'GET',
-        baseURL: 'https://api.waifu.pics',
-        url: '/endpoints',
-      })
-
-      // Prevent duplicates
-      this.filters.sfw = [...new Set(res.data.sfw)]
     },
   },
 }
 </script>
-
-<style scoped>
-.image {
-  width: 100% !important;
-  height: auto !important;
-}
-</style>
