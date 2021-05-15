@@ -38,9 +38,7 @@
           </template>
 
           <v-card>
-            <v-card-text>
-              <v-img :src="image" alt="Waifu Image"></v-img>
-            </v-card-text>
+            <img class="image" :src="image" alt="Waifu Image" />
           </v-card>
         </v-dialog>
       </v-col>
@@ -120,3 +118,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.image {
+  width: 100% !important;
+  height: auto !important;
+}
+</style>
