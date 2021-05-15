@@ -15,7 +15,7 @@
     </v-card>
 
     <v-row>
-      <v-col v-for="image in images" :key="image" cols="4">
+      <v-col v-for="image in images" :key="image" cols="6" sm="6" md="4" lg="4">
         <v-dialog scrollable>
           <template #activator="{ on, attrs }">
             <v-img
