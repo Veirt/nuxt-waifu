@@ -17,16 +17,16 @@
     <v-row>
       <v-col v-for="image in images" :key="image" cols="4">
         <v-dialog scrollable>
-          <template v-slot:activator="{ on, attrs }">
+          <template #activator="{ on, attrs }">
             <v-img
               v-bind="attrs"
-              v-on="on"
               :src="image"
               aspect-ratio="1"
               class="grey"
               position="top"
+              v-on="on"
             >
-              <template v-slot:placeholder>
+              <template #placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
                   <v-progress-circular
                     indeterminate
@@ -55,6 +55,19 @@ export default {
       filtered: 'waifu',
     }
   },
+  watch: {
+    filtered() {
+      this.getImages(this.filtered)
+    },
+  },
+  created() {
+    this.getImages()
+    this.getFilters()
+  },
+  mounted() {
+    this.getNextImages()
+  },
+
   methods: {
     filterImages(image) {
       if (!this.images.includes(image)) this.images.push(image)
@@ -101,19 +114,6 @@ export default {
 
       // Prevent duplicates
       this.filters.sfw = [...new Set(res.data.sfw)]
-    },
-  },
-
-  created() {
-    this.getImages()
-    this.getFilters()
-  },
-  mounted() {
-    this.getNextImages()
-  },
-  watch: {
-    filtered() {
-      this.getImages(this.filtered)
     },
   },
 }
