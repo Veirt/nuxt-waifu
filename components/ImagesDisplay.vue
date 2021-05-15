@@ -9,11 +9,13 @@
             aspect-ratio="1"
             class="grey"
             position="top"
+            aria-label="Waifu Image"
             v-on="on"
           >
             <template #placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
                 <v-progress-circular
+                  aria-label="Loading image"
                   indeterminate
                   color="#000"
                 ></v-progress-circular>

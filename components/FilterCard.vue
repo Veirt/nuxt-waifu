@@ -4,7 +4,7 @@
       <v-row no-gutters>
         <v-col v-for="filter in filters" :key="filter" cols="auto">
           <v-btn-toggle v-model="filtered">
-            <v-btn :value="filter">
+            <v-btn aria-label="Filter Buton" :value="filter">
               {{ filter }}
             </v-btn>
           </v-btn-toggle>
