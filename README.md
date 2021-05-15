@@ -1,4 +1,6 @@
-# nuxt-anime-api
+# nuxt-waifu
+
+So uh...
 
 ## Build Setup
 
