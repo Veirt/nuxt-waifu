@@ -19,6 +19,30 @@ export default {
         name: 'description',
         content: 'A website that generate random waifu pics',
       },
+      {
+        property: 'og:title',
+        content: 'Waifu Pics',
+      },
+      {
+        property: 'og:site_name',
+        content: 'Nuxt.js | Waifu Pics',
+      },
+      {
+        property: 'og:url',
+        content: 'https://waifu.exlog.wtf',
+      },
+      {
+        property: 'og:description',
+        content: 'A website that generate random waifu pics',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:image',
+        content: '/og-image.png',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
