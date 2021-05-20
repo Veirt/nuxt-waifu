@@ -32,21 +32,25 @@ export const mutations = {
 
 export const actions = {
   async fetchFilters({ commit }: any, payload: { $axios: NuxtAxiosInstance }) {
-    const res = await payload.$axios.$get('/endpoints')
-    commit('SET_FILTERS', res.sfw)
+    try {
+      const res = await payload.$axios.$get('/endpoints')
+      commit('SET_FILTERS', res.sfw)
+    } catch (err) { }
   },
 
   async fetchImages(
     { state, commit }: any,
     { $axios, action }: { $axios: NuxtAxiosInstance; action?: string }
   ) {
-    const res = await $axios.$post(`/many/sfw/${state.filtered}`, {
-      excludes: [],
-    })
-    if (action === 'set') {
-      commit('SET_IMAGES', res.files)
-    } else {
-      commit('ADD_IMAGES', res.files)
-    }
+    try {
+      const res = await $axios.$post(`/many/sfw/${state.filtered}`, {
+        excludes: [],
+      })
+      if (action === 'set') {
+        commit('SET_IMAGES', res.files)
+      } else {
+        commit('ADD_IMAGES', res.files)
+      }
+    } catch (err) { }
   },
 }
