@@ -1,7 +1,7 @@
 <template>
   <v-card flat class="py-12">
     <v-card-text>
-      <v-btn-toggle mandatory v-model="filtered">
+      <v-btn-toggle v-model="filtered" mandatory>
         <v-row no-gutters>
           <v-col v-for="filter in filters" :key="filter" cols="auto">
             <v-btn outlined aria-label="Filter Buton" :value="filter">
