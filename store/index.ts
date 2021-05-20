@@ -22,7 +22,7 @@ export const mutations = {
     })
   },
   SET_FILTERS(state: States, filters: Array<string>) {
-    state.filters = [...new Set(filters)]
+    state.filters = filters
   },
 
   SET_FILTERED(state: States, payload: { filter: string }) {
