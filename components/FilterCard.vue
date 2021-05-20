@@ -1,15 +1,15 @@
 <template>
   <v-card flat class="py-12">
     <v-card-text>
-      <v-row no-gutters>
-        <v-col v-for="filter in filters" :key="filter" cols="auto">
-          <v-btn-toggle v-model="filtered">
-            <v-btn aria-label="Filter Buton" :value="filter">
+      <v-btn-toggle mandatory v-model="filtered">
+        <v-row no-gutters>
+          <v-col v-for="filter in filters" :key="filter" cols="auto">
+            <v-btn outlined aria-label="Filter Buton" :value="filter">
               {{ filter }}
             </v-btn>
-          </v-btn-toggle>
-        </v-col>
-      </v-row>
+          </v-col>
+        </v-row>
+      </v-btn-toggle>
     </v-card-text>
   </v-card>
 </template>
